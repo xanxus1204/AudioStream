@@ -15,6 +15,7 @@
 		4307C55D1BD8BBD4001AF19F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4307C55B1BD8BBD4001AF19F /* LaunchScreen.storyboard */; };
 		4307C5681BD8BBD4001AF19F /* AudioStreamerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4307C5671BD8BBD4001AF19F /* AudioStreamerTests.m */; };
 		4307C5731BD8BBD4001AF19F /* AudioStreamerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4307C5721BD8BBD4001AF19F /* AudioStreamerUITests.m */; };
+		4307C5821BD8BCF8001AF19F /* myaudioqueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 4307C5811BD8BCF8001AF19F /* myaudioqueue.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,8 @@
 		4307C56E1BD8BBD4001AF19F /* AudioStreamerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AudioStreamerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4307C5721BD8BBD4001AF19F /* AudioStreamerUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioStreamerUITests.m; sourceTree = "<group>"; };
 		4307C5741BD8BBD4001AF19F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4307C5801BD8BCF8001AF19F /* myaudioqueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myaudioqueue.h; sourceTree = "<group>"; };
+		4307C5811BD8BCF8001AF19F /* myaudioqueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myaudioqueue.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +108,8 @@
 				4307C5511BD8BBD4001AF19F /* AppDelegate.m */,
 				4307C5531BD8BBD4001AF19F /* ViewController.h */,
 				4307C5541BD8BBD4001AF19F /* ViewController.m */,
+				4307C5801BD8BCF8001AF19F /* myaudioqueue.h */,
+				4307C5811BD8BCF8001AF19F /* myaudioqueue.m */,
 				4307C5561BD8BBD4001AF19F /* Main.storyboard */,
 				4307C5591BD8BBD4001AF19F /* Assets.xcassets */,
 				4307C55B1BD8BBD4001AF19F /* LaunchScreen.storyboard */,
@@ -275,6 +280,7 @@
 			files = (
 				4307C5551BD8BBD4001AF19F /* ViewController.m in Sources */,
 				4307C5521BD8BBD4001AF19F /* AppDelegate.m in Sources */,
+				4307C5821BD8BCF8001AF19F /* myaudioqueue.m in Sources */,
 				4307C54F1BD8BBD4001AF19F /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -415,6 +421,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = AudioStreamer/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = kurumecs.AudioStreamer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -426,6 +433,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = AudioStreamer/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = kurumecs.AudioStreamer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
