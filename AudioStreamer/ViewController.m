@@ -11,6 +11,8 @@
 @interface ViewController ()
 @property MPMusicPlayerController * controler;
 @property myaudioqueue * queue;
+@property MultipeerHost * myMulti;
+@property StreamingPlayer * StPlayer;
 @end
 
 @implementation ViewController
@@ -18,7 +20,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.queue=[[myaudioqueue alloc]init];
-    
+    self.myMulti=[[MultipeerHost alloc]init];
+    self.StPlayer=[[StreamingPlayer alloc]init];
+    [self.StPlayer start];
+    [self.myMulti startClient];
   
     
         // Do any additional setup after loading the view, typically from a nib.
@@ -49,7 +54,7 @@
     exportSession.outputFileType = [[exportSession supportedFileTypes] objectAtIndex:0];
     
     NSString *docDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString *filePath = [[docDir stringByAppendingPathComponent:[item valueForProperty:MPMediaItemPropertyTitle]] stringByAppendingPathExtension:@"aif"];
+    NSString *filePath = [[docDir stringByAppendingPathComponent:[item valueForProperty:MPMediaItemPropertyTitle]] stringByAppendingPathExtension:@"m4a"];
     
     exportSession.outputURL = [NSURL fileURLWithPath:filePath];
     
@@ -73,6 +78,8 @@
             NSLog(@"export session completed");
            self.queue= [self.queue initWithFilepath:exportSession.outputURL];
             [self.queue play];
+            NSData*data=[[NSData alloc]initWithContentsOfFile:filePath];
+            [self.myMulti sendData:data];
            
         } else {
             NSLog(@"export session error");
@@ -89,4 +96,12 @@
 -(void)mediaPickerDidCancel:(MPMediaPickerController *)mediaPicker{
     [mediaPicker dismissViewControllerAnimated:YES completion:nil];
      }
+-(void)recvDataPacket:(NSData *)data{
+    [self.StPlayer recvAudio:data];
+}
+- (IBAction)inviteBtnTap:(id)sender {
+     [self.myMulti startHost];
+    [self.myMulti stopClient];
+}
+
 @end

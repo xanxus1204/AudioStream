@@ -15,7 +15,9 @@
 		4307C55D1BD8BBD4001AF19F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4307C55B1BD8BBD4001AF19F /* LaunchScreen.storyboard */; };
 		4307C5681BD8BBD4001AF19F /* AudioStreamerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4307C5671BD8BBD4001AF19F /* AudioStreamerTests.m */; };
 		4307C5731BD8BBD4001AF19F /* AudioStreamerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4307C5721BD8BBD4001AF19F /* AudioStreamerUITests.m */; };
-		4307C5821BD8BCF8001AF19F /* myaudioqueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 4307C5811BD8BCF8001AF19F /* myaudioqueue.m */; settings = {ASSET_TAGS = (); }; };
+		4307C5821BD8BCF8001AF19F /* myaudioqueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 4307C5811BD8BCF8001AF19F /* myaudioqueue.m */; };
+		43A46C2B1BD9FA8100C3AD4C /* MultipeerHost.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A46C2A1BD9FA8100C3AD4C /* MultipeerHost.m */; };
+		43A46C2E1BDA013E00C3AD4C /* StreamingPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A46C2D1BDA013E00C3AD4C /* StreamingPlayer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +56,10 @@
 		4307C5741BD8BBD4001AF19F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4307C5801BD8BCF8001AF19F /* myaudioqueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myaudioqueue.h; sourceTree = "<group>"; };
 		4307C5811BD8BCF8001AF19F /* myaudioqueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myaudioqueue.m; sourceTree = "<group>"; };
+		43A46C291BD9FA8100C3AD4C /* MultipeerHost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultipeerHost.h; sourceTree = "<group>"; };
+		43A46C2A1BD9FA8100C3AD4C /* MultipeerHost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultipeerHost.m; sourceTree = "<group>"; };
+		43A46C2C1BDA013E00C3AD4C /* StreamingPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StreamingPlayer.h; sourceTree = "<group>"; };
+		43A46C2D1BDA013E00C3AD4C /* StreamingPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StreamingPlayer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +116,10 @@
 				4307C5541BD8BBD4001AF19F /* ViewController.m */,
 				4307C5801BD8BCF8001AF19F /* myaudioqueue.h */,
 				4307C5811BD8BCF8001AF19F /* myaudioqueue.m */,
+				43A46C2C1BDA013E00C3AD4C /* StreamingPlayer.h */,
+				43A46C2D1BDA013E00C3AD4C /* StreamingPlayer.m */,
+				43A46C291BD9FA8100C3AD4C /* MultipeerHost.h */,
+				43A46C2A1BD9FA8100C3AD4C /* MultipeerHost.m */,
 				4307C5561BD8BBD4001AF19F /* Main.storyboard */,
 				4307C5591BD8BBD4001AF19F /* Assets.xcassets */,
 				4307C55B1BD8BBD4001AF19F /* LaunchScreen.storyboard */,
@@ -278,6 +288,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43A46C2B1BD9FA8100C3AD4C /* MultipeerHost.m in Sources */,
+				43A46C2E1BDA013E00C3AD4C /* StreamingPlayer.m in Sources */,
 				4307C5551BD8BBD4001AF19F /* ViewController.m in Sources */,
 				4307C5521BD8BBD4001AF19F /* AppDelegate.m in Sources */,
 				4307C5821BD8BCF8001AF19F /* myaudioqueue.m in Sources */,
@@ -507,6 +519,7 @@
 				4307C5791BD8BBD4001AF19F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4307C57A1BD8BBD4001AF19F /* Build configuration list for PBXNativeTarget "AudioStreamerTests" */ = {
 			isa = XCConfigurationList;
@@ -515,6 +528,7 @@
 				4307C57C1BD8BBD4001AF19F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4307C57D1BD8BBD4001AF19F /* Build configuration list for PBXNativeTarget "AudioStreamerUITests" */ = {
 			isa = XCConfigurationList;
@@ -523,6 +537,7 @@
 				4307C57F1BD8BBD4001AF19F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
