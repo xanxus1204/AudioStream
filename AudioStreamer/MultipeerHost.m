@@ -141,8 +141,9 @@
     NSInteger d=0;
     int ini;
     u_int8_t buf[BUF];
+    _mdata = [[NSMutableData alloc]init];
     
-   
+    for ( ini=0; ini<=data.length; ini=ini+BUF) {
                while (1) {
                 if ([self.oStream hasSpaceAvailable])
                     break;
@@ -152,10 +153,10 @@
             if ((ini>=data.length-BUF)||(data.length<BUF)){
                 d=data.length-ini;
                 u_int8_t buf[d];
-                NSLog(@"%ld",data.length);
+                NSLog(@"%ld",(unsigned long)data.length);
                 [data getBytes:buf range:NSMakeRange(ini,d)];
                 _mdata=[_mdata initWithBytes:buf length:sizeof(buf)];
-                NSData*keyData=[@"EndOfFile" dataUsingEncoding:NSUTF8StringEncoding];
+             //   NSData*keyData=[@"EndOfFile" dataUsingEncoding:NSUTF8StringEncoding];
                 
                 NSInteger writebytesremain=0;
                 do{
@@ -174,7 +175,7 @@
                 }while(writebytesremain!=sizeof(buf));
                 
                 [NSThread sleepForTimeInterval:0.30];
-                [self.oStream write:keyData.bytes maxLength:keyData.length];
+                //[self.oStream write:keyData.bytes maxLength:keyData.length];
                 NSLog(@"送信完了");
                 
                 
@@ -202,7 +203,8 @@
                 
                 
             }
-        
+    }
+    
         
 
     
@@ -317,10 +319,12 @@
 // require delegate method
 
 - (void)session:(MCSession *)session didReceiveStream:(NSInputStream *)stream withName:(NSString *)streamName fromPeer:(MCPeerID *)peerID{
+    NSLog(@"input %@",streamName);
     self.iStream=stream;
     self.iStream.delegate=self;
+    [self.iStream scheduleInRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
     [self.iStream open];
-    [self.iStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
+    NSLog(@"%lu", (unsigned long)self.iStream.streamStatus);
     
 }
 
@@ -341,7 +345,6 @@
 }
 //NSStream delegate
 -(void)stream:(NSStream *)aStream handleEvent:(NSStreamEvent)eventCode{//データを受け取るなどの動作
-    
     switch (eventCode) {
         case NSStreamEventOpenCompleted:
             NSLog(@"空いた");
@@ -356,6 +359,7 @@
                 
                 
             }else{
+               
                 NSInteger bytesWritten;
                 NSInteger bytesWrittenSoFar;
                 bytesWrittenSoFar = 0;
@@ -365,15 +369,17 @@
                     [_recvData appendBytes:&buffer[bytesWrittenSoFar]
                                   length:bytesRead-bytesWrittenSoFar];
                     bytesWritten = [_recvData length];
-                    if (bytesWritten == -1) {
+                if (bytesWritten == -1) {
                         break;
                     }else{
                         bytesWrittenSoFar += bytesRead;
                     }
                 }while (bytesWrittenSoFar != bytesRead);
                 [self recvDataPacket];
-                break;
+
+                
             }
+            break;
         }
     
         case NSStreamEventHasSpaceAvailable:
@@ -393,6 +399,7 @@
 }
 -(void)recvDataPacket{
     if([self.delegate respondsToSelector:@selector(recvDataPacket:)]){
+        NSLog(@"%ld",(unsigned long)_recvData.length);
         [self.delegate recvDataPacket:_recvData];
     }
 }

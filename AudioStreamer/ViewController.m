@@ -21,6 +21,7 @@
     [super viewDidLoad];
     self.queue=[[myaudioqueue alloc]init];
     self.myMulti=[[MultipeerHost alloc]init];
+    self.myMulti.delegate=self;
     self.StPlayer=[[StreamingPlayer alloc]init];
     [self.StPlayer start];
     [self.myMulti startClient];
