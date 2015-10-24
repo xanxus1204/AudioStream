@@ -154,7 +154,7 @@ void outputCallback( void                 *inClientData,
                     AudioQueueRef        inAQ,
                     AudioQueueBufferRef  inBuffer ){
     StreamInfo* streamInfo = (StreamInfo*)inClientData;
-    
+    NSLog(@"a");
     //㈰inBufferがstreamInfo->audioQueueBuffer[ ]のどれかを探す
     UInt32 bufIndex = 0;
     for (int i = 0; i < kNumberOfBuffers; ++i){
@@ -172,4 +172,5 @@ void outputCallback( void                 *inClientData,
                               0);
     
 }
+
 @end
