@@ -27,11 +27,12 @@ void propertyListenerProc(
                           AudioFileStreamPropertyID		inPropertyID,
                           UInt32 *						ioFlags
                           ){
-    NSLog(@"%s",__PRETTY_FUNCTION__);
+   
     StreamInfo* streamInfo = (StreamInfo*)inClientData;
     OSStatus err;
     
     //オーディオデータパケットを解析する準備が完了
+    NSLog(@"property%u",(unsigned int)inPropertyID);
     if(inPropertyID == kAudioFileStreamProperty_ReadyToProducePackets){
         
         //ASBDを取得する
@@ -66,7 +67,7 @@ void packetsProc( void *inClientData,
                  UInt32                        inNumberPackets,
                  const void                    *inInputData,
                  AudioStreamPacketDescription  *inPacketDescriptions ){
-    
+    NSLog(@"packetsprc");
     StreamInfo* streamInfo = (StreamInfo*)inClientData;
     
     for (int i = 0; i < inNumberPackets; i++) {
@@ -118,8 +119,7 @@ static void checkError(OSStatus err,const char *message){
     }
 }
 static void enqueueBuffer(StreamInfo* streamInfo){
-    printf("--------%s\n",__PRETTY_FUNCTION__);
-    OSStatus err = noErr;
+       OSStatus err = noErr;
     
     //バッファに充填済みフラグを立てる
     streamInfo->inuse[streamInfo->fillBufferIndex] = YES;

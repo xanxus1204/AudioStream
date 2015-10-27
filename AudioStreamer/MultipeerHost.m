@@ -22,6 +22,7 @@
 @property NSInputStream *iStream;
 @property NSOutputStream *oStream;
 @property NSMutableData *mdata;
+@property int datacount;
 -(void)postNotification;
 -(void)postNotificationc;
 @end
@@ -149,6 +150,7 @@
                     break;
                 
             }
+        
             d=BUF;
             if ((ini>=data.length-BUF)||(data.length<BUF)){
                 d=data.length-ini;
@@ -399,7 +401,9 @@
 }
 -(void)recvDataPacket{
     if([self.delegate respondsToSelector:@selector(recvDataPacket:)]){
-        NSLog(@"%ld",(unsigned long)_recvData.length);
+       // NSLog(@"%ld",(unsigned long)_recvData.length);
+        self.datacount=self.datacount+(int)_recvData.length;
+        NSLog(@"%d",self.datacount);
         [self.delegate recvDataPacket:_recvData];
     }
 }
