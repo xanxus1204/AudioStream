@@ -13,6 +13,7 @@
 #import "myaudioqueue.h"
 #import "MultipeerHost.h"
 #import "StreamingPlayer.h"
+#import "AudioConverter.h"
 @interface ViewController : UIViewController<MPMediaPickerControllerDelegate,MultipeerDataDelegate>
 
 

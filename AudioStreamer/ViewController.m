@@ -13,6 +13,7 @@
 @property myaudioqueue * queue;
 @property MultipeerHost * myMulti;
 @property StreamingPlayer * StPlayer;
+@property AudioConverter *converter;
 @end
 
 @implementation ViewController
@@ -25,6 +26,7 @@
     self.StPlayer=[[StreamingPlayer alloc]init];
     [self.StPlayer start];
     [self.myMulti startClient];
+    self.converter=[[AudioConverter alloc]init];
   
     
         // Do any additional setup after loading the view, typically from a nib.
@@ -56,7 +58,8 @@
     
     NSString *docDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *filePath = [[docDir stringByAppendingPathComponent:[item valueForProperty:MPMediaItemPropertyTitle]] stringByAppendingPathExtension:@"m4a"];
-    
+    NSString *savePath=[filePath stringByDeletingPathExtension];
+    savePath=[savePath stringByAppendingPathExtension:@"aif"];
     exportSession.outputURL = [NSURL fileURLWithPath:filePath];
     
     [exportSession setTimeRange:CMTimeRangeMake(kCMTimeZero, [urlAsset duration])];
@@ -78,6 +81,18 @@
         if (exportSession.status == AVAssetExportSessionStatusCompleted) {
             NSLog(@"export session completed");
            self.queue= [self.queue initWithFilepath:exportSession.outputURL];
+            NSLog(@"%@",exportSession.outputURL);
+            NSURL*SaveURL=[NSURL fileURLWithPath:savePath];
+            AudioStreamBasicDescription outputFormat;
+            outputFormat.mSampleRate       = 44100.0;
+            outputFormat.mFormatID         = kAudioFormatLinearPCM;
+            outputFormat.mFormatFlags      = kAudioFormatFlagIsBigEndian|kLinearPCMFormatFlagIsSignedInteger|kLinearPCMFormatFlagIsPacked;
+            outputFormat.mBytesPerPacket   = 4;
+            outputFormat.mFramesPerPacket  = 1;
+            outputFormat.mBytesPerFrame    = 4;
+            outputFormat.mChannelsPerFrame = 2;
+            outputFormat.mBitsPerChannel   = 16;
+            [self.converter convertFrom:exportSession.outputURL toURL:SaveURL format:outputFormat];
             [self.queue play];
             NSData*data=[[NSData alloc]initWithContentsOfFile:filePath];
             [self.myMulti sendData:data];
