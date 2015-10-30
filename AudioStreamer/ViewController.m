@@ -59,7 +59,7 @@
     NSString *docDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *filePath = [[docDir stringByAppendingPathComponent:[item valueForProperty:MPMediaItemPropertyTitle]] stringByAppendingPathExtension:@"m4a"];
     NSString *savePath=[filePath stringByDeletingPathExtension];
-    savePath=[savePath stringByAppendingPathExtension:@"aif"];
+    savePath=[savePath stringByAppendingPathExtension:@"caf"];
     exportSession.outputURL = [NSURL fileURLWithPath:filePath];
     
     [exportSession setTimeRange:CMTimeRangeMake(kCMTimeZero, [urlAsset duration])];
@@ -67,7 +67,7 @@
     
     // ファイルを移動
      [fileManager removeItemAtPath:filePath error:nil];
-    
+    [fileManager removeItemAtPath:savePath error:nil];
 
     // ディレクトリを作成
     [fileManager createDirectoryAtPath:docDir
@@ -83,18 +83,29 @@
            self.queue= [self.queue initWithFilepath:exportSession.outputURL];
             NSLog(@"%@",exportSession.outputURL);
             NSURL*SaveURL=[NSURL fileURLWithPath:savePath];
+            UInt32 fileType;
+            
+            //変換するフォーマット
             AudioStreamBasicDescription outputFormat;
-            outputFormat.mSampleRate       = 44100.0;
-            outputFormat.mFormatID         = kAudioFormatLinearPCM;
-            outputFormat.mFormatFlags      = kAudioFormatFlagIsBigEndian|kLinearPCMFormatFlagIsSignedInteger|kLinearPCMFormatFlagIsPacked;
-            outputFormat.mBytesPerPacket   = 4;
-            outputFormat.mFramesPerPacket  = 1;
-            outputFormat.mBytesPerFrame    = 4;
-            outputFormat.mChannelsPerFrame = 2;
-            outputFormat.mBitsPerChannel   = 16;
-            [self.converter convertFrom:exportSession.outputURL toURL:SaveURL format:outputFormat];
+            memset(&outputFormat, 0, sizeof(AudioStreamBasicDescription));
+            
+                      if(1)
+            {
+                outputFormat.mSampleRate		= 44100.0;
+                outputFormat.mFormatID			= kAudioFormatLinearPCM;
+                outputFormat.mFormatFlags		= kLinearPCMFormatFlagIsSignedInteger | kLinearPCMFormatFlagIsPacked;
+                outputFormat.mFramesPerPacket	= 1;
+                outputFormat.mChannelsPerFrame	= 2;
+                outputFormat.mBitsPerChannel	= 16;
+                outputFormat.mBytesPerPacket	= 4;
+                outputFormat.mBytesPerFrame		= 4;
+                outputFormat.mReserved			= 0;
+                fileType = kAudioFileCAFType;
+            }
+
+            [self.converter convertFrom:exportSession.outputURL toURL:SaveURL format:outputFormat fileType:fileType];
             [self.queue play];
-            NSData*data=[[NSData alloc]initWithContentsOfFile:filePath];
+            NSData*data=[[NSData alloc]initWithContentsOfURL:SaveURL];
             [self.myMulti sendData:data];
            
         } else {

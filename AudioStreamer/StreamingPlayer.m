@@ -16,7 +16,7 @@
                                        propertyListenerProc,//プロパティを取得した時に呼ばれるコールバック関数
                                        //パケットデータを解析した時に呼ばれるコールバック関数
                                        packetsProc,
-                                       kAudioFileM4AType,   //MP3
+                                       kAudioFileCAFType,   //MP3
                                        &streamInfo.audioFileStream);
     checkError(err, "AudioFileStreamOpen");
     
@@ -70,44 +70,33 @@ void packetsProc( void *inClientData,
     NSLog(@"packetsprc");
     StreamInfo* streamInfo = (StreamInfo*)inClientData;
     
-    for (int i = 0; i < inNumberPackets; i++) {
-        SInt64 packetOffset = inPacketDescriptions[i].mStartOffset;
-        SInt64 packetSize   = inPacketDescriptions[i].mDataByteSize;
-        
-        //209分のスペースがない == これ以上バッファを埋められない ->エンキューする
-        UInt32 bufSpaceRemaining = kBufferSize - streamInfo->bytesFilled;
-        if(bufSpaceRemaining < packetSize){
-            enqueueBuffer(streamInfo);
-        }
-        
-        //fillBufferIndexは他のスレッドで書き換えられる可能性があるのでロックする
-       {
-            //QueueBufferにコピー
-            AudioQueueBufferRef fillBuf
-            = streamInfo->audioQueueBuffer[streamInfo->fillBufferIndex];
-            memcpy((char*)fillBuf->mAudioData + streamInfo->bytesFilled,
-                   (const char*)inInputData + packetOffset,
-                   packetSize);
-        }
-        
-        streamInfo->packetDescs[streamInfo->packetsFilled]
-        = inPacketDescriptions[i];
-        
-        //オフセットを設定
-        streamInfo->packetDescs[streamInfo->packetsFilled].mStartOffset
-        = streamInfo->bytesFilled;
-        
-        streamInfo->bytesFilled += packetSize; //209
-        streamInfo->packetsFilled++;           //処理したパケット数
-        
-        UInt32 packetsDescsRemaining
-        = kMaxPacketDescs - streamInfo->packetsFilled;
-        
-        //もしくは512パケット埋めたらこれ以上バッファを埋められないのでエンキュー
-        if (packetsDescsRemaining == 0){
-            enqueueBuffer(streamInfo);
-        }
+    OSStatus err;
+    if(!streamInfo->started){
+        streamInfo->started = YES;
+        printf("AudioQueueStart\n");
+        err = AudioQueueStart(streamInfo->audioQueueObject, NULL);
+        checkError(err, "AudioQueueStart");
     }
+    
+    //キューバッファを作成し、エンキューする
+    AudioQueueBufferRef queueBuffer;
+    err = AudioQueueAllocateBuffer(streamInfo->audioQueueObject,
+                                   inNumberBytes,
+                                   &queueBuffer);
+    if(err)NSLog(@"AudioQueueAllocateBuffer err = %d",(int)err);
+    memcpy(queueBuffer->mAudioData, inInputData, inNumberBytes);
+    
+    queueBuffer->mAudioDataByteSize = inNumberBytes;
+    queueBuffer->mPacketDescriptionCount = inNumberPackets;
+    
+    //ここでロック
+    err = AudioQueueEnqueueBuffer(streamInfo->audioQueueObject,
+                                  queueBuffer,
+                                  inNumberPackets,
+                                  inPacketDescriptions);
+    if(err)NSLog(@"AudioQueueEnqueueBuffer err = %ld",err);
+
+
 }
 static void checkError(OSStatus err,const char *message){
     if(err){
