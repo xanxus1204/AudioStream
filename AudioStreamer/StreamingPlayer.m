@@ -94,7 +94,8 @@ void packetsProc( void *inClientData,
                                   queueBuffer,
                                   inNumberPackets,
                                   inPacketDescriptions);
-    if(err)NSLog(@"AudioQueueEnqueueBuffer err = %ld",err);
+
+    if(err)NSLog(@"AudioQueueEnqueueBuffer err = %d",(int)err);
 
 
 }

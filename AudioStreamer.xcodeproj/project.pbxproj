@@ -18,7 +18,7 @@
 		4307C5821BD8BCF8001AF19F /* myaudioqueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 4307C5811BD8BCF8001AF19F /* myaudioqueue.m */; };
 		43A46C2B1BD9FA8100C3AD4C /* MultipeerHost.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A46C2A1BD9FA8100C3AD4C /* MultipeerHost.m */; };
 		43A46C2E1BDA013E00C3AD4C /* StreamingPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A46C2D1BDA013E00C3AD4C /* StreamingPlayer.m */; };
-		43E5A11A1BE1EF890004C60D /* AudioConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E5A1191BE1EF890004C60D /* AudioConverter.m */; };
+		43E5A1B51BE344010004C60D /* AudioConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E5A1B41BE344010004C60D /* AudioConverter.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,8 +61,8 @@
 		43A46C2A1BD9FA8100C3AD4C /* MultipeerHost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultipeerHost.m; sourceTree = "<group>"; };
 		43A46C2C1BDA013E00C3AD4C /* StreamingPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StreamingPlayer.h; sourceTree = "<group>"; };
 		43A46C2D1BDA013E00C3AD4C /* StreamingPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StreamingPlayer.m; sourceTree = "<group>"; };
-		43E5A1181BE1EF890004C60D /* AudioConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioConverter.h; sourceTree = "<group>"; };
-		43E5A1191BE1EF890004C60D /* AudioConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioConverter.m; sourceTree = "<group>"; };
+		43E5A1B31BE344010004C60D /* AudioConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioConverter.h; sourceTree = "<group>"; };
+		43E5A1B41BE344010004C60D /* AudioConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioConverter.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,10 +121,10 @@
 				4307C5811BD8BCF8001AF19F /* myaudioqueue.m */,
 				43A46C2C1BDA013E00C3AD4C /* StreamingPlayer.h */,
 				43A46C2D1BDA013E00C3AD4C /* StreamingPlayer.m */,
-				43E5A1181BE1EF890004C60D /* AudioConverter.h */,
-				43E5A1191BE1EF890004C60D /* AudioConverter.m */,
 				43A46C291BD9FA8100C3AD4C /* MultipeerHost.h */,
 				43A46C2A1BD9FA8100C3AD4C /* MultipeerHost.m */,
+				43E5A1B31BE344010004C60D /* AudioConverter.h */,
+				43E5A1B41BE344010004C60D /* AudioConverter.m */,
 				4307C5561BD8BBD4001AF19F /* Main.storyboard */,
 				4307C5591BD8BBD4001AF19F /* Assets.xcassets */,
 				4307C55B1BD8BBD4001AF19F /* LaunchScreen.storyboard */,
@@ -294,7 +294,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				43A46C2B1BD9FA8100C3AD4C /* MultipeerHost.m in Sources */,
-				43E5A11A1BE1EF890004C60D /* AudioConverter.m in Sources */,
+				43E5A1B51BE344010004C60D /* AudioConverter.m in Sources */,
 				43A46C2E1BDA013E00C3AD4C /* StreamingPlayer.m in Sources */,
 				4307C5551BD8BBD4001AF19F /* ViewController.m in Sources */,
 				4307C5521BD8BBD4001AF19F /* AppDelegate.m in Sources */,
