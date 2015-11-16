@@ -16,6 +16,7 @@
 		4307C5681BD8BBD4001AF19F /* AudioStreamerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4307C5671BD8BBD4001AF19F /* AudioStreamerTests.m */; };
 		4307C5731BD8BBD4001AF19F /* AudioStreamerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4307C5721BD8BBD4001AF19F /* AudioStreamerUITests.m */; };
 		4307C5821BD8BCF8001AF19F /* myaudioqueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 4307C5811BD8BCF8001AF19F /* myaudioqueue.m */; };
+		434A77531BF5AEE700A9A606 /* ExtAudioConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 434A77521BF5AEE700A9A606 /* ExtAudioConverter.m */; };
 		43A46C2B1BD9FA8100C3AD4C /* MultipeerHost.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A46C2A1BD9FA8100C3AD4C /* MultipeerHost.m */; };
 		43A46C2E1BDA013E00C3AD4C /* StreamingPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A46C2D1BDA013E00C3AD4C /* StreamingPlayer.m */; };
 		43E5A1B51BE344010004C60D /* AudioConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E5A1B41BE344010004C60D /* AudioConverter.m */; };
@@ -57,6 +58,8 @@
 		4307C5741BD8BBD4001AF19F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4307C5801BD8BCF8001AF19F /* myaudioqueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myaudioqueue.h; sourceTree = "<group>"; };
 		4307C5811BD8BCF8001AF19F /* myaudioqueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myaudioqueue.m; sourceTree = "<group>"; };
+		434A77511BF5AEE700A9A606 /* ExtAudioConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtAudioConverter.h; sourceTree = "<group>"; };
+		434A77521BF5AEE700A9A606 /* ExtAudioConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtAudioConverter.m; sourceTree = "<group>"; };
 		43A46C291BD9FA8100C3AD4C /* MultipeerHost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultipeerHost.h; sourceTree = "<group>"; };
 		43A46C2A1BD9FA8100C3AD4C /* MultipeerHost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultipeerHost.m; sourceTree = "<group>"; };
 		43A46C2C1BDA013E00C3AD4C /* StreamingPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StreamingPlayer.h; sourceTree = "<group>"; };
@@ -125,6 +128,8 @@
 				43A46C2A1BD9FA8100C3AD4C /* MultipeerHost.m */,
 				43E5A1B31BE344010004C60D /* AudioConverter.h */,
 				43E5A1B41BE344010004C60D /* AudioConverter.m */,
+				434A77511BF5AEE700A9A606 /* ExtAudioConverter.h */,
+				434A77521BF5AEE700A9A606 /* ExtAudioConverter.m */,
 				4307C5561BD8BBD4001AF19F /* Main.storyboard */,
 				4307C5591BD8BBD4001AF19F /* Assets.xcassets */,
 				4307C55B1BD8BBD4001AF19F /* LaunchScreen.storyboard */,
@@ -294,6 +299,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				43A46C2B1BD9FA8100C3AD4C /* MultipeerHost.m in Sources */,
+				434A77531BF5AEE700A9A606 /* ExtAudioConverter.m in Sources */,
 				43E5A1B51BE344010004C60D /* AudioConverter.m in Sources */,
 				43A46C2E1BDA013E00C3AD4C /* StreamingPlayer.m in Sources */,
 				4307C5551BD8BBD4001AF19F /* ViewController.m in Sources */,
@@ -441,7 +447,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = AudioStreamer/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "kurumecs.AudioStreamer-";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -456,7 +462,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = AudioStreamer/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "kurumecs.AudioStreamer-";
 				PRODUCT_NAME = "$(TARGET_NAME)";

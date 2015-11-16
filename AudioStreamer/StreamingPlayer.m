@@ -16,7 +16,7 @@
                                        propertyListenerProc,//プロパティを取得した時に呼ばれるコールバック関数
                                        //パケットデータを解析した時に呼ばれるコールバック関数
                                        packetsProc,
-                                       kAudioFileCAFType,   //MP3
+                                       kAudioFormatMPEG4AAC,   //MP3
                                        &streamInfo.audioFileStream);
     checkError(err, "AudioFileStreamOpen");
     

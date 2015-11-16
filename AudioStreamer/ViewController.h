@@ -14,6 +14,7 @@
 #import "MultipeerHost.h"
 #import "StreamingPlayer.h"
 #import "AudioConverter.h"
+#import "ExtAudioConverter.h"
 @interface ViewController : UIViewController<MPMediaPickerControllerDelegate,MultipeerDataDelegate>
 
 

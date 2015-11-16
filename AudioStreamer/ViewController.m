@@ -80,7 +80,7 @@
         
         if (exportSession.status == AVAssetExportSessionStatusCompleted) {
             NSLog(@"export session completed");
-           self.queue= [self.queue initWithFilepath:exportSession.outputURL];
+          
             NSLog(@"%@",exportSession.outputURL);
             NSURL*SaveURL=[NSURL fileURLWithPath:savePath];
             UInt32 fileType;
@@ -89,7 +89,7 @@
             AudioStreamBasicDescription outputFormat;
             memset(&outputFormat, 0, sizeof(AudioStreamBasicDescription));
             
-                      if(1)
+            if(1)
             {
                 outputFormat.mSampleRate		= 44100.0;
                 outputFormat.mFormatID			= kAudioFormatLinearPCM;
@@ -102,10 +102,47 @@
                 outputFormat.mReserved			= 0;
                 fileType = kAudioFileCAFType;
             }
-
+            
             [self.converter convertFrom:exportSession.outputURL toURL:SaveURL format:outputFormat fileType:fileType];
+            
+            //変換するフォーマット
+            
+            
+            AudioSessionInitialize(NULL, NULL, NULL, NULL);
+            AudioSessionSetActive(YES);
+            UInt32 audioCategory;
+            audioCategory = kAudioSessionCategory_AudioProcessing;
+            AudioSessionSetProperty(kAudioSessionProperty_AudioCategory,
+                                    sizeof(audioCategory),
+                                    &audioCategory);
+            
+            NSString *ssavePath=[filePath stringByDeletingPathExtension];
+            ssavePath=[ssavePath stringByAppendingPathExtension:@"aac"];
+            NSURL*SsaveURL=[NSURL fileURLWithPath:ssavePath];
+
+            //変換するフォーマット(AAC)
+          
+            memset(&outputFormat, 0, sizeof(AudioStreamBasicDescription));
+            outputFormat.mSampleRate       = 44100.0;
+            outputFormat.mFormatID         = kAudioFormatMPEG4AAC;//AAC
+            outputFormat.mChannelsPerFrame = 1;
+            
+            UInt32 size = sizeof(AudioStreamBasicDescription);
+            AudioFormatGetProperty(kAudioFormatProperty_FormatInfo,
+                                   0, NULL,
+                                   &size,
+                                   &outputFormat);
+            
+            ExtAudioConverter *extConverter = [[ExtAudioConverter alloc]init];
+            [extConverter convertFrom:SaveURL toURL:SsaveURL format:outputFormat];
+            
+            audioCategory = kAudioSessionCategory_MediaPlayback;
+            AudioSessionSetProperty(kAudioSessionProperty_AudioCategory, 
+                                    sizeof(audioCategory), 
+                                    &audioCategory);
+             self.queue= [self.queue initWithFilepath:exportSession.outputURL];
             [self.queue play];
-            NSData*data=[[NSData alloc]initWithContentsOfURL:SaveURL];
+            NSData*data=[[NSData alloc]initWithContentsOfURL:SsaveURL];
             [self.myMulti sendData:data];
            
         } else {
